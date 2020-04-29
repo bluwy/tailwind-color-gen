@@ -1,4 +1,4 @@
-const plugins = [require("tailwindcss")]
+const plugins = [require('tailwindcss')]
 
 if (process.env.NODE_ENV === 'production') {
   plugins.push(
