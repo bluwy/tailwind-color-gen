@@ -1,8 +1,10 @@
 <template>
   <div class="flex flex-col justify-center items-center">
-    <h1 class="text-3xl my-6">
-      Tailwind Color Generator
-    </h1>
+    <header>
+      <h1 class="text-3xl my-6">
+        Tailwind Color Generator
+      </h1>
+    </header>
     <label
       for="color"
       class="opacity-75 mb-1"
@@ -37,6 +39,11 @@
         :color="dangerColor"
       />
     </section>
+    <footer class="text-center py-3">
+      <p>
+        View project on <a href="https://github.com/bjornlug/tailwind-color-gen">GitHub</a>
+      </p>
+    </footer>
   </div>
 </template>
 
