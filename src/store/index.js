@@ -49,6 +49,23 @@ export default new Vuex.Store({
     grayColor: (state, getters) => (shade = 500) => {
       const color = chroma.mix(state.baseGrayColor, state.primaryColor, state.baseBlendRatio, 'lab')
       return chroma(color).darken(getters.darkenValue(shade)).hex()
+    },
+    // This is a horrible function. Should be removed once refactored the above to list.
+    shadeColorResult: (state) => (fn) => {
+      return state.shades.reduce((acc, shade) => {
+        acc[shade] = fn(shade)
+        return acc
+      }, {})
+    },
+    colorResult (state, getters) {
+      return {
+        primary: getters.shadeColorResult(getters.primaryShadeColor),
+        info: getters.shadeColorResult(getters.infoColor),
+        warning: getters.shadeColorResult(getters.warningColor),
+        success: getters.shadeColorResult(getters.successColor),
+        danger: getters.shadeColorResult(getters.dangerColor),
+        gray: getters.shadeColorResult(getters.grayColor)
+      }
     }
   }
 })

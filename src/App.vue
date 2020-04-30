@@ -47,6 +47,9 @@
         :shades="grayColorShades"
       />
     </section>
+    <section class="w-full max-w-sm m-3">
+      <ColorResult />
+    </section>
     <footer class="text-center py-5">
       <p>
         View project on
@@ -64,11 +67,13 @@
 <script>
 import { mapGetters, mapMutations, mapState } from 'vuex'
 import chroma from 'chroma-js'
+import ColorResult from '@/components/ColorResult.vue'
 import ShadeList from '@/components/ShadeList.vue'
 
 export default {
   name: 'App',
   components: {
+    ColorResult,
     ShadeList
   },
   data: () => ({
