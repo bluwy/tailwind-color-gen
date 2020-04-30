@@ -1,51 +1,61 @@
 <template>
   <div class="flex flex-col justify-center items-center">
     <header>
-      <h1 class="text-3xl my-6">
+      <h1 class="font-light text-2xl my-5">
         Tailwind Color Generator
       </h1>
     </header>
-    <label
-      for="color"
-      class="opacity-75 mb-1"
-    >Primary color</label>
     <input
-      id="color"
       v-model="inputColor"
       type="text"
-      class="border border-gray-500 rounded px-4 py-3 mb-6 focus:border-gray-800 focus:bg-gray-100 transition duration-100"
-      placeholder="#ff9faf"
+      class="border border-gray-500 rounded px-4 py-3 mb-5 focus:border-gray-800 focus:bg-gray-100 transition duration-100"
+      placeholder="Primary color, e.g. #ff9faf"
       autofocus
     >
-    <section class="flex flex-row flex-wrap space-x-4">
+    <section>
       <ShadeList
+        class="inline-block m-2"
         label="Primary"
         :shades="primaryColorShades"
       />
       <ShadeList
+        class="inline-block m-2"
         label="Info"
         :shades="infoColorShades"
       />
+      <br class="block sm:hidden">
       <ShadeList
+        class="inline-block m-2"
         label="Warning"
         :shades="warningColorShades"
       />
+      <br class="hidden sm:block lg:hidden">
       <ShadeList
+        class="inline-block m-2"
         label="Success"
         :shades="successColorShades"
       />
+      <br class="block sm:hidden">
       <ShadeList
+        class="inline-block m-2"
         label="Danger"
         :shades="dangerColorShades"
       />
       <ShadeList
+        class="inline-block m-2"
         label="Gray"
         :shades="grayColorShades"
       />
     </section>
-    <footer class="text-center py-3">
+    <footer class="text-center py-5">
       <p>
-        View project on <a href="https://github.com/bjornlug/tailwind-color-gen">GitHub</a>
+        View project on
+        <a
+          class="font-semibold underline"
+          href="https://github.com/bjornlug/tailwind-color-gen"
+        >
+          GitHub
+        </a>
       </p>
     </footer>
   </div>
