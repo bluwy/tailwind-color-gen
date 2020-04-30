@@ -11,6 +11,7 @@ export default new Vuex.Store({
     baseWarningColor: '#fd0',
     baseSuccessColor: '#3e4',
     baseDangerColor: '#f34',
+    baseGrayColor: '#bfbfbf',
     baseBlendRatio: 0.2,
     shades: [100, 200, 300, 400, 500, 600, 700, 800, 900],
     mainShade: 500
@@ -43,6 +44,10 @@ export default new Vuex.Store({
     },
     dangerColor: (state, getters) => (shade = 500) => {
       const color = chroma.mix(state.baseDangerColor, state.primaryColor, state.baseBlendRatio, 'lab')
+      return chroma(color).darken(getters.darkenValue(shade)).hex()
+    },
+    grayColor: (state, getters) => (shade = 500) => {
+      const color = chroma.mix(state.baseGrayColor, state.primaryColor, state.baseBlendRatio, 'lab')
       return chroma(color).darken(getters.darkenValue(shade)).hex()
     }
   }

@@ -38,6 +38,10 @@
         label="Danger"
         :shades="dangerColorShades"
       />
+      <ShadeList
+        label="Gray"
+        :shades="grayColorShades"
+      />
     </section>
     <footer class="text-center py-3">
       <p>
@@ -71,7 +75,8 @@ export default {
       'infoColor',
       'warningColor',
       'successColor',
-      'dangerColor'
+      'dangerColor',
+      'grayColor'
     ]),
     primaryColorShades () {
       return this.shades.map(shade => ({
@@ -101,6 +106,12 @@ export default {
       return this.shades.map(shade => ({
         shade,
         color: this.dangerColor(shade)
+      }))
+    },
+    grayColorShades () {
+      return this.shades.map(shade => ({
+        shade,
+        color: this.grayColor(shade)
       }))
     }
   },
