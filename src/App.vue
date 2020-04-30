@@ -11,7 +11,7 @@
     >Primary color</label>
     <input
       id="color"
-      v-model="colorInput"
+      v-model="inputColor"
       type="text"
       class="border border-gray-500 rounded px-4 py-3 mb-6 focus:border-gray-800 focus:bg-gray-100 transition duration-100"
       placeholder="#ff9faf"
@@ -20,23 +20,23 @@
     <section class="flex flex-row flex-wrap space-x-4">
       <ShadeList
         label="Primary"
-        :color="primaryColor"
+        :shades="primaryColorShades"
       />
       <ShadeList
         label="Info"
-        :color="infoColor"
+        :shades="infoColorShades"
       />
       <ShadeList
         label="Warning"
-        :color="warningColor"
+        :shades="warningColorShades"
       />
       <ShadeList
         label="Success"
-        :color="successColor"
+        :shades="successColorShades"
       />
       <ShadeList
         label="Danger"
-        :color="dangerColor"
+        :shades="dangerColorShades"
       />
     </section>
     <footer class="text-center py-3">
@@ -48,6 +48,7 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations, mapState } from 'vuex'
 import chroma from 'chroma-js'
 import ShadeList from '@/components/ShadeList.vue'
 
@@ -57,26 +58,63 @@ export default {
     ShadeList
   },
   data: () => ({
-    colorInput: ''
+    inputColor: ''
   }),
   computed: {
-    primaryColor () {
-      return chroma.valid(this.colorInput)
-        ? chroma(this.colorInput).hex().substring(0, 7)
-        : '#ff9faf'
+    ...mapState([
+      'primaryColor',
+      'shades',
+      'mainShade'
+    ]),
+    ...mapGetters([
+      'primaryShadeColor',
+      'infoColor',
+      'warningColor',
+      'successColor',
+      'dangerColor'
+    ]),
+    primaryColorShades () {
+      return this.shades.map(shade => ({
+        shade,
+        color: this.primaryShadeColor(shade)
+      }))
     },
-    infoColor () {
-      return chroma.mix('#3df', this.primaryColor, 0.2, 'lab')
+    infoColorShades () {
+      return this.shades.map(shade => ({
+        shade,
+        color: this.infoColor(shade)
+      }))
     },
-    warningColor () {
-      return chroma.mix('#fd0', this.primaryColor, 0.2, 'lab')
+    warningColorShades () {
+      return this.shades.map(shade => ({
+        shade,
+        color: this.warningColor(shade)
+      }))
     },
-    successColor () {
-      return chroma.mix('#3e4', this.primaryColor, 0.2, 'lab')
+    successColorShades () {
+      return this.shades.map(shade => ({
+        shade,
+        color: this.successColor(shade)
+      }))
     },
-    dangerColor () {
-      return chroma.mix('#f34', this.primaryColor, 0.2, 'lab')
+    dangerColorShades () {
+      return this.shades.map(shade => ({
+        shade,
+        color: this.dangerColor(shade)
+      }))
     }
+  },
+  watch: {
+    inputColor (val) {
+      if (chroma.valid(val)) {
+        this.setPrimaryColor({ color: chroma(val).hex().substring(0, 7) })
+      }
+    }
+  },
+  methods: {
+    ...mapMutations({
+      setPrimaryColor: 'SET_PRIMARY_COLOR'
+    })
   }
 }
 </script>

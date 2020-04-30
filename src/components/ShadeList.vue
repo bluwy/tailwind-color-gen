@@ -1,16 +1,16 @@
 <template>
   <div
     class="p-4 rounded-lg border-2 space-y-3 transition duration-200"
-    :style="{ backgroundColor, borderColor: color }"
+    :style="{ backgroundColor, borderColor: mainColor }"
   >
     <div class="font-xl font-bold">
       {{ label }}
     </div>
     <ShadeListItem
       v-for="shade in shades"
-      :key="shade"
-      :shade="shade"
-      :color="getColor(shade)"
+      :key="shade.shade"
+      :shade="shade.shade"
+      :color="shade.color"
     />
   </div>
 </template>
@@ -18,9 +18,6 @@
 <script>
 import chroma from 'chroma-js'
 import ShadeListItem from '@/components/ShadeListItem.vue'
-
-const shades = [100, 200, 300, 400, 500, 600, 700, 800, 900]
-const mainShade = 500
 
 export default {
   name: 'ShadeList',
@@ -32,23 +29,18 @@ export default {
       type: String,
       required: true
     },
-    color: {
-      type: String,
+    shades: {
+      type: Array,
       required: true
     }
   },
-  data: () => ({
-    shades
-  }),
   computed: {
+    mainColor () {
+      const centerIndex = Math.round(this.shades.length / 2)
+      return this.shades[centerIndex].color
+    },
     backgroundColor () {
-      return chroma(this.color).alpha(0.2)
-    }
-  },
-  methods: {
-    getColor (shade) {
-      const darkenValue = (shade - mainShade) / 100 / 2
-      return chroma(this.color).darken(darkenValue)
+      return chroma(this.mainColor).alpha(0.2).hex()
     }
   }
 }
