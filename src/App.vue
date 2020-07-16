@@ -55,7 +55,7 @@
         View project on
         <a
           class="font-semibold underline"
-          href="https://github.com/bjornlug/tailwind-color-gen"
+          href="https://github.com/bluwy/tailwind-color-gen"
         >
           GitHub
         </a>
