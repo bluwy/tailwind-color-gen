@@ -1,6 +1,6 @@
 <template>
-  <highlight-code
-    lang="javascript"
+  <highlightjs
+    language="javascript"
     class="rounded-lg overflow-hidden"
     :code="colorResultString"
   />

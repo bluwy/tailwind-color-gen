@@ -2,7 +2,7 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/6277f91d-38ce-4668-8ec1-1fdbd7b2dca2/deploy-status)](https://app.netlify.com/sites/tailwind-color-gen/deploys)
 
-Yet another [Tailwind](https://tailwindcss.com/) color palette generator.
+Yet another [Tailwind](https://tailwindcss.com/) color palette generator, for Tailwind v1.
 
 Visit https://tailwind-color-gen.netlify.app
 
